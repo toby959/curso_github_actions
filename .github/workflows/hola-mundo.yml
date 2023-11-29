@@ -1,19 +1,25 @@
-name: Aprendiendo GitHub Actions
+
+name: Hola Mundo
+
 on: [push]
+
 jobs:
-  hola-mundo:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-      - name: Definir variable
-        run: echo "USERNAME=${{ github.actor }}" >> $GITHUB_ENV
-      - name: Compilar y ejecutar
-        run: |
-          javac HolaMundo.java
-          java HolaMundo
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Hola Mundo script
+      run: python hola_mundo.py
+
